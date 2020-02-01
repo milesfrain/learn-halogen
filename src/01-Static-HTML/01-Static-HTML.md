@@ -46,3 +46,7 @@ To compile the next file and view its results in the browser, use these instruct
 spago bundle-app -m StaticHTML.StaticHTML -t assets/static-html/static-html.js
 parcel serve assets/static-html/static-html.html -o static-html--parcelified.html --open
 ```
+
+## Exercises
+1. Add another button below the first button with text label "Another Button".
+2. Add a paragraph (`p` tag) containing any text.

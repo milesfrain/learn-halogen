@@ -70,3 +70,6 @@ To compile the next file and view its results in the browser, use these instruct
 spago bundle-app -m StaticHTML.AddingProperties -t assets/static-html/adding-properties.js
 parcel serve assets/static-html/adding-properties.html -o adding-properties--parcelified.html --open
 ```
+
+## Exercises
+1. Assign class names of "special-button" and "it-clicks" to the button.

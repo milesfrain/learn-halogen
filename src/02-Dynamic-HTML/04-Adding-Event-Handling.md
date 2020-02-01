@@ -64,3 +64,7 @@ To compile the next file and view its results in the browser, use these instruct
 spago bundle-app -m DynamicHtml.AddingEventHandling -t assets/dynamic-html/adding-event-handling.js
 parcel serve assets/dynamic-html/adding-event-handling.html -o adding-event-handling--parcelified.html --open
 ```
+
+## Exercises
+1. Make the button behave as a stoplight that rotates through three states: `Green, Yellow, Red`. Hint, use "algebraic data types" and `case` statements.
+2. Change the background color of the button to match its state. Hint, refer to previous chapter on CSS.

@@ -85,3 +85,6 @@ To compile the next file and view its results in the browser, use these instruct
 spago bundle-app -m StaticHTML.AddingCSS -t assets/static-html/adding-css.js
 parcel serve assets/static-html/adding-css.html -o adding-css--parcelified.html --open
 ```
+
+## Exercises
+1. Change the `color` of the text of the span to `blue` and the button to `green`. Remember to add the necessary imports.

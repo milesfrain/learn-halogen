@@ -28,3 +28,7 @@ To compile the next file and view its results in the browser, use these instruct
 spago bundle-app -m DynamicHtml.AddingState -t assets/dynamic-html/adding-state.js
 parcel serve assets/dynamic-html/adding-state.html -o adding-state--parcelified.html --open
 ```
+
+## Exercises
+1. Change the numbered states `1 2 3` to characters `A B C`.
+2. Add a 4th state. Note that `assets/dynamic-html/adding-state.html` requires an edit.
