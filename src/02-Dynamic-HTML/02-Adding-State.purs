@@ -20,13 +20,13 @@ import Web.HTML (HTMLElement)
 
 main :: Effect Unit
 main =
-  -- We're going to run the same function below 3 times using
-  -- the 3 values provided here.
-  runStateOnlyDynamicRenderer 1 2 3 simpleIntState
+  -- We're going to run the same function below 4 times using
+  -- the 4 values provided here.
+  runStateOnlyDynamicRenderer 'A' 'B' 'C' 'D' simpleIntState
 
 -- | Shows how to use Halogen VDOM DSL to render dynamic HTML
 -- | (no event handling) based on the state value received.
-simpleIntState :: Int -> StaticHTML
+simpleIntState :: Char -> StaticHTML
 simpleIntState state =
   HH.div_ [ HH.text $ "The state was: " <> show state ]
 
@@ -41,24 +41,27 @@ type StaticHTML = H.ComponentHTML Unit () Aff
 type StateOnlyDynamicRenderer state = (state -> StaticHTML)
 
 -- | Uses the `state` type's value to render dynamic HTML
--- | using 3 different state values.
+-- | using 4 different state values.
 runStateOnlyDynamicRenderer :: forall state.
                                state
                             -> state
                             -> state
+                            -> state
                             -> StateOnlyDynamicRenderer state
                             -> Effect Unit
-runStateOnlyDynamicRenderer firstState secondState thirdState rendererFunction =
+runStateOnlyDynamicRenderer firstState secondState thirdState fourthState rendererFunction =
   launchAff_ do
     awaitLoad
 
     div1 <- selectElement' "could not find 'div#first'" $ QuerySelector "#first"
     div2 <- selectElement' "could not find 'div#second'" $ QuerySelector "#second"
     div3 <- selectElement' "could not find 'div#third'" $ QuerySelector "#third"
+    div4 <- selectElement' "could not find 'div#fourth'" $ QuerySelector "#fourth"
 
     void $ runUI (stateOnlyStaticComponent firstState  rendererFunction) unit div1
     void $ runUI (stateOnlyStaticComponent secondState rendererFunction) unit div2
     void $ runUI (stateOnlyStaticComponent thirdState  rendererFunction) unit div3
+    void $ runUI (stateOnlyStaticComponent fourthState rendererFunction) unit div4
 
 -- | Wraps Halogen types cleanly, so that one gets very clear compiler errors
 stateOnlyStaticComponent :: forall state.

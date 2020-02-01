@@ -23,8 +23,16 @@ staticHtml =
         -- as does the `span` tag
         [ HH.text "This is text in a span!" ]
       ]
-    , HH.button_
+    , HH.button_ -- may optionally wrap this button in a `div`
       [ HH.text "You can click me, but I don't do anything." ]
+    -- exercise 1
+    , HH.div_
+      [ HH.button_
+        [ HH.text "Another button" ]
+      ]
+    -- exercise 2
+    , HH.p_ -- may optionally wrap this paragraph in a div
+      [ HH.text "This is paragraph text" ]
     ]
 
 --- Scaffolded code below ---

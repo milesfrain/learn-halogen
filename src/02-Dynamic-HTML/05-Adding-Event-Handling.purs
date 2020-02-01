@@ -3,9 +3,11 @@ module DynamicHtml.AddingEventHandling where
 import Prelude
 
 -- Imports for lesson
+import CSS (backgroundColor, green, yellow, red)
 import Control.Monad.State (get, put)
 import Data.Maybe (Maybe(..))
 import Halogen.HTML as HH
+import Halogen.HTML.CSS as CSS
 import Halogen.HTML.Events as HE
 
 -- Imports for scaffolding
@@ -17,39 +19,50 @@ import Halogen as H
 import Halogen.Aff (awaitBody)
 import Halogen.VDom.Driver (runUI)
 
--- | Our state type. Either the button is 'on' or 'off'.
-type State = Boolean
+-- | Our state type. The button cycles through every stoplight color.
+data State = Green
+           | Yellow
+           | Red
 
--- | Our action type. It indicates the button's state should be inverted
-data Action = Toggle
+-- | Our action type. It indicates the button's state should be advanced.
+data Action = NextColor
 
 -- | Shows how to add event handling.
 toggleButton :: StateAndActionRenderer State Action
-toggleButton isOn =
-  let toggleLabel = if isOn then "ON" else "OFF"
+toggleButton buttonState =
+  let
+    toggleLabel = case buttonState of
+      Green -> "GREEN"
+      Yellow -> "YELLOW"
+      Red -> "RED"
+    lightColor = case buttonState of
+      Green -> green
+      Yellow -> yellow
+      Red -> red
   in
     HH.button
-      [ HE.onClick \_ -> Just Toggle ]
-      [ HH.text $ "The button is " <> toggleLabel ]
+      [ HE.onClick \_ -> Just NextColor
+      , CSS.style $ backgroundColor lightColor ]
+      [ HH.text $ "The light is " <> toggleLabel ]
 
 -- | Shows how to use actions to update the component's state
 handleAction :: HandleSimpleAction State Action
 handleAction = case _ of
-  Toggle -> do
+  NextColor -> do
     oldState <- get
-    let newState = not oldState
+    let
+      newState = case oldState of
+        Green -> Yellow
+        Yellow -> Red
+        Red -> Green
     put newState
-
-    -- or, with one line, we could use
-    -- modify_ \oldState -> not oldState
-
 
 -- Now we can run the code
 
 main :: Effect Unit
 main =
   runStateAndActionComponent
-    { initialState: false
+    { initialState: Green
     , render: toggleButton
     , handleAction: handleAction
     }

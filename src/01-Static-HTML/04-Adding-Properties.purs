@@ -29,7 +29,9 @@ staticHtmlWithProps =
         [ HH.text "This is text in a span!" ]
       ]
     , HH.button
-      [ HP.type_ ButtonButton ]
+      [ HP.type_ ButtonButton
+      , HP.classes [ ClassName "special-button", ClassName "it-clicks" ]
+      ]
       [ HH.text "You can click me, but I don't do anything." ]
     ]
 

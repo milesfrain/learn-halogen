@@ -3,7 +3,7 @@ module StaticHTML.AddingCSS where
 import Prelude
 
 -- Imports for lesson
-import CSS (backgroundColor, fontSize, orange, px, red)
+import CSS (backgroundColor, fontSize, orange, px, red, color, blue, green)
 import Halogen.HTML (ClassName(..))
 import Halogen.HTML as HH
 import Halogen.HTML.CSS as CSS
@@ -31,11 +31,14 @@ staticHtmlWithPropsAndCss =
         , CSS.style do
             fontSize $ px 20.0
             backgroundColor orange
+            color blue
         ]
         [ HH.text "This is text in a span!" ]
       ]
     , HH.button
-      [ HP.type_ ButtonButton ]
+      [ HP.type_ ButtonButton
+      , CSS.style $ color green
+      ]
       [ HH.text "You can click me, but I don't do anything." ]
     ]
 
